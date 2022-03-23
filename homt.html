@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/fontawesome.min.css" integrity="sha512-xX2rYBFJSj86W54Fyv1de80DWBq7zYLn2z0I9bIhQG+rxIF6XVJUpdGnsNHWRa6AvP89vtFupEPDP8eZAtu9qA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css" integrity="sha512-KfkfwYDsLkIlwQp6LFnl8zNdLGxu9YAA1QvwINks4PhcElQSvqcyVLLD9aMhXd13uQjoXtEKNosOWaZqXgel0g==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link
+    rel="stylesheet"
+    href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"
+  />
+    <title>Document</title>
+</head>
+<style>
+    .box{
+        position: absolute;
+        margin-top: 10%;
+        margin-left: 40%;
+        width: 20rem;
+        height: 28rem;
+        overflow: hidden;
+         border-radius: 10px;
+         background-color:  #6699ff;
+         padding: 14px;
+    }
+    h2{
+        position: relative;
+        margin-top: 7.5rem;
+        text-align: center;
+    }
+    h1{
+        position: relative;
+        margin-top: 4rem;
+        text-align: center;
+    }
+    .date,.degreeminmax{
+        position: relative;
+        z-index: 4;
+        text-align: center;
+    }
+    .div-one{
+        width: 30rem;
+        height: 30rem;
+        z-index: 0;
+        background-color: #00ffff;
+        border-radius: 40%;
+        margin-left: -6.6rem;
+        opacity: 0.4;
+        margin-top: 13rem;
+        position: absolute;
+        animation: rotates 3s linear infinite;
+    }
+    .div-two{
+        width: 30rem;
+        height: 30rem;
+        z-index: 0;
+        background-color:  #00ffff;
+        border-radius: 42%;
+        margin-left: -6.6rem;
+        opacity: 0.4;
+        margin-top: 12rem;
+        position: absolute;
+        animation: rotates 3s linear infinite alternate;
+    }
+    .div-three{
+        width: 30rem;
+        height: 30rem;
+        z-index: 0;
+        background-color:  #00ffff;
+        border-radius: 42%;
+        margin-left: -4rem;
+        opacity: 0.2;
+        margin-top: 13.5rem;
+        position: absolute;
+        animation: rotates 3s linear infinite ;
+    }
+    @keyframes rotates{
+      from{
+        transform: rotate(0deg);
+      }
+      to{
+        transform: rotate(359deg);      }
+    }
+</style>
+<body>
+    <div class="box">
+        <div class="div-one"></div>
+        <div class="div-two"></div>
+        <div class="div-three"></div>
+
+        <div class="condition">
+            <i class="fa-solid fa-sun fa-5x" style="color: yellow;position: relative;margin-left: 8rem;margin-top: 17px;"></i>
+        </div>
+        <div class="tempdeg">
+            <h2 class="place"><i class="fa-solid fa-street-view"></i>{%state%},{%country%}</h2>
+            <div class="date">wed| 23 March | 10:20 A.M.</div>
+            <h1 class="temp">{%tempval%}°C</h1>
+            <div class="degreeminmax">MIN. {%tempmin%}­°C& MAX.{%tempmax%}°C</div>
+        </div>
+    </div>
+
+    <script>
+        const iconcondition=document.querySelector(".condition");
+        let curdate=document.querySelector(".date");
+        let curplace=document.querySelector(".place");
+        let curtemp=document.querySelector(".temp");
+        let curdegreeminmax=document.querySelector(".degreeminmax");
+      const getcurrentinfo =()=>{
+          var weekday=new Array(7);
+          weekday[0]="Sun";
+          weekday[1]="Mon";
+          weekday[2]="Tues";
+          weekday[3]="wed";
+          weekday[4]="Thurs";
+          weekday[5]="Fri";
+          weekday[6]="Sat";
+
+  var month=[
+      "Jan",
+      "Feb",
+      "March",
+      "April",
+      "May",
+      "June",
+      "July",
+      "August",
+      "September",
+      "October",
+      "november",
+      "Dec"
+  ]
+
+        const dates=new Date();
+        let days=weekday[dates.getDay()];
+        let date=dates.getDate();
+       let hours=dates.getHours();
+       let min=dates.getMinutes();
+        let sec=dates.getSeconds();
+        months=month[dates.getMonth()];
+        let period="AM";
+
+        if(hours>11){
+            period="PM";
+            if(hours>12) 
+         hours -=12;
+        }
+        if(min<10){
+            min="0"+min;
+        }
+      return ` ${days} | ${months} ${date} | ${hours}:${min}:${sec} ${period}`;
+      };
+       
+      curdate.innerHTML=getcurrentinfo();
+    </script> 
+</body>
+</html>
